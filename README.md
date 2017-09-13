@@ -2,7 +2,7 @@
 
 ## react系列
 
-[滴滴平台技术部前端招聘](https://github.com/lj614418910/blog/MD/master/.md)
+[redux笔记](https://github.com/lj614418910/blog/MD/redux.md)
 
 ## vue系列
 
