@@ -152,23 +152,23 @@
 	- Object.assign()实现（深层克隆）
 	
 		```
-	   Object.prototype._assignCopy = function(...arr){
-      		var _self = arr.shift() || {}
-        	arr.forEach(function(item){
-            	for(var prop in item){
-                	if(item.hasOwnProperty(prop)){
-                    	if(typeof (item[prop]) == 'object'){
-                        	_self[prop] = ((_self[prop]) instanceof Array)? []:{}
-                        	Object._assignCopy( _self[prop],item[prop])
-                    	}else{
-                        	_self[prop] = item[prop]
-                    	}
-                	}
-                
-        		}
-        	})
-        	return _self;
-    }
+		Object.prototype._assignCopy = function(...arr){
+			var _self = arr.shift() || {}
+			arr.forEach(function(item){
+		    	for(var prop in item){
+		        	if(item.hasOwnProperty(prop)){
+		            	if(typeof (item[prop]) == 'object'){
+		                	_self[prop] = ((_self[prop]) instanceof Array)? []:{}
+		                	Object._assignCopy( _self[prop],item[prop])
+		            	}else{
+		                	_self[prop] = item[prop]
+		            	}
+		        	}
+		        
+				}
+			})
+			return _self;
+		}
 		```
 	
 11. 实现bind函数
@@ -185,8 +185,9 @@
 	```
 12. class和prototype的区别
 
-	![](./20160314212504_39150.png)
-	![](./20160116201909_44777.png)
+	![](https://github.com/lj614418910/blog/blob/master/images/20160314212504_39150.png)
+	
+	![](https://github.com/lj614418910/blog/blob/master/images/20160116201909_44777.png)
 	
 13. filter实现
 
