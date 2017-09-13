@@ -1,4 +1,4 @@
-![](https://github.com/lj614418910/blog/images/redux.png)
+![](https://github.com/lj614418910/blog/blob/master/images/redux.png)
 # Redux学习笔记
 ## 设计思想
 ### 核心概念
@@ -6,7 +6,7 @@
 - 用户在 UI 上发出`action`。
 - `reducer`函数接收`action`，然后根据当前的`state`，计算出新的`state`。
 
-![](https://github.com/lj614418910/blog/images/redux-architecture.png)
+![](https://github.com/lj614418910/blog/blob/master/images/redux-architecture.png)
 
 ### 动机
 - 随着 JavaScript 单页应用开发日趋复杂，JavaScript 需要管理比任何时候都要多的 `state` （状态）。通过限制更新发生的时间和方式，Redux 试图让 `state` 的变化变得可预测。
