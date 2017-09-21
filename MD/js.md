@@ -194,13 +194,13 @@
 	```
 	Array.prototype._filter = function (callback,thisVal){
 		var _self = thisVal || this;
-		var arr = [];
+		var _arr = [];
 		_self.forEach(function(item, index, arr){
 		    if(callback(item,index,arr)){
-			arr.push(item);
+			_arr.push(item);
 		    }
 		})
-		return arr;
+		return _arr;
 	}
 	```
 
