@@ -193,15 +193,30 @@
 
 	```
 	Array.prototype._filter = function (callback,thisVal){
-        var _self = thisVal || this;
-        var arr = [];
-        _self.forEach(function(item, index, arr){
-            if(callback(item,index,arr)){
-                arr.push(item);
-            }
-        })
-        return arr;
-    }
+		var _self = thisVal || this;
+		var arr = [];
+		_self.forEach(function(item, index, arr){
+		    if(callback(item,index,arr)){
+			arr.push(item);
+		    }
+		})
+		return arr;
+	}
+	```
+
+	map实现
+	
+	```
+	Array.prototype._map = function (callback,thisVal){
+		var _self = thisVal || this;
+		var _arr = [];
+		_self.forEach(function(item, index, arr){
+
+			_arr.push(callback(item,index,arr));
+		})
+		console.log(_arr);
+		return _arr;
+	}
 	```
 	
 14. jsop实现
@@ -253,14 +268,48 @@
 15. find函数实现
 
 	```
-	function findIt(obj, str){		var Obj = obj;		var flag = true;		var arr = str.split('.');		arr.forEach(function(val, index){			if(Obj[val]){				Obj = Obj[val];			}else{				flag = false;				return false;			}		});		if(flag){			return Obj;		}else{			return undefined;		}	}
+	function findIt(obj, str){
+		var Obj = obj;
+		var flag = true;
+		var arr = str.split('.');
+		arr.forEach(function(val, index){
+			if(Obj[val]){
+				Obj = Obj[val];
+			}else{
+				flag = false;
+				return false;
+			}
+		});
+		if(flag){
+			return Obj;
+		}else{
+			return undefined;
+		}
+	}
 	```
 16. 两个栈生成一个队列
 
 	```
-	var arr1 = [1,2,3,4,5];	var arr2 = []	Array.prototype.enqueue = function(ele){		this.push(ele);	}	Array.prototype.dequeue = function(){		var len1 = this.length;		for(let i = 0; i < len1; i++){			arr2.push(this.pop());		}		var tar = arr2.pop();		var len2 = arr2.length;		for(let i = 0; i < len2; i++){			this.push(arr2.pop());		}
+	var arr1 = [1,2,3,4,5];
+	var arr2 = []
+	Array.prototype.enqueue = function(ele){
+		this.push(ele);
+	}
+	Array.prototype.dequeue = function(){
+		var len1 = this.length;
+		for(let i = 0; i < len1; i++){
+			arr2.push(this.pop());
+		}
+		var tar = arr2.pop();
+		var len2 = arr2.length;
+		for(let i = 0; i < len2; i++){
+			this.push(arr2.pop());
+		}
 		return tar;
-	}	arr1.enqueue(6);	arr1.dequeue();	console.log(arr1);
+	}
+	arr1.enqueue(6);
+	arr1.dequeue();
+	console.log(arr1);
 	```
 
 ## DOM(Document Object Model 文档对象模型)
