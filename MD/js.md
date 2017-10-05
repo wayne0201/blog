@@ -489,6 +489,70 @@
 		- 当一个元素使用百分比高度时，标准模式下，高度取决于内容变化，怪异模式下，百分比高度被正确应用。
 	- 元素溢出的处理：标准模式下，overflow取默认值visible，在怪异模式下，该溢出会被当做扩展box来对待，即元素的大小由其内容决定，溢出不会裁减，元素框自动调整，包含溢出内容。
 
+21. 使用jquery，找到id为'selector'的select标签中拥有'data-target'属性，且值为'isme'的option的值。
+
+	```
+	var value;
+	$('select#selector option').each(function(){
+	    if ($(this).data('target') == 'isme') {
+	        value = $(this).val();
+	    }
+	});
+	```
+	```
+	var value = $('#selector option[data-target="isme"]').val();
+	```
+	
+22. 请优化以下代码
+	
+	```
+	for (var i = 0; i < document.getElementsByTagName('a').length; i ++) {
+		document.getElementsByTagName('a')[i].onmouseover = function() {
+			this.style.color = 'red';
+		}
+		document.getElementsByTagName('a')[i].onmouseout = function() {
+			this.style.color = '';
+		}
+	}
+	```
+	```
+	//优化后
+	var elems = document.getElementsByTagName('a');
+    var len = document.getElementsByTagName('a').length;
+
+    for (var i = 0; i < len; i ++) {
+        elems[i].onmouseover = function() {
+            this.style.color = 'red';
+        }
+        elems[i].onmouseout = function() {
+            this.style.color = '';
+        }
+    }
+	```
+	
+23. 设计一个算法，将两个有序数组，合并为一个有序数组，请不要使用concat以及sort方法。
+
+	```
+	function merge(arr1, arr2){
+        var arr = [];
+        while(arr1.length != 0 || arr2.length != 0){
+            if(arr1[0] == undefined){
+                arr.push(arr2.shift());
+            }else if(arr2[0] == undefined) {
+                arr.push(arr1.shift());
+            }else{
+                if(arr1[0] <= arr2[0]){
+                    arr.push(arr1.shift());
+                } else {
+                    arr.push(arr2.shift()); 
+                }
+            }
+        }
+        return arr;
+    }
+	```
+	
+
 ## DOM(Document Object Model 文档对象模型)
 1. 查看元素节点。
 	- **getElementById("id")**
