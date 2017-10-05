@@ -1,3 +1,144 @@
+# HTML、CSS
+1. 盒模型的宽高值计算方式？
+	
+		![](https://github.com/lj614418910/blog/blob/master/images/20170321180119900.png)
+	
+		![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)
+		
+2. 边界合并，边界塌陷？
+	- 边界合并是指上下两个元素的外边距重合在一起。
+	- 边界塌陷是指父子级的两个元素的外边距重合在一起了。
+
+3. box-sizing的概念？
+	- box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素，默认值是content-box。还可以设置为box-sizing。
+	- content-box：
+		- padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、padding之和，即 ( Element width = width + border + padding)
+		- 此属性表现为标准模式下的盒模型。
+	- border-box：
+		- padding和border被包含在定义的width和height之内。对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，即 ( Element width = width )
+		- 此属性表现为怪异模式下的盒模型。
+
+4. 简要说下BFC(Block Formatting Context)是什么？有哪些应用？
+	- bfc全称是block format context——块级格式化上下文
+	- 浮动元素、绝对定位元素，不是块级盒的块级包含块(比如inline-block、table-cell、table-capation)和overflow值不为visible的块级盒子为它们的内容建立了一个新的块级排版上下文。
+	- 在一个块级排版上下文中，盒子是从包含块顶部开始，垂直的一个接一个的排列的，相邻两个盒子之间的垂直的间距是被margin属性所决定的，在一个块级排版上下文中相邻的两个块级盒之间的垂直margin是折叠的。参与BFC的布局的只有普通流normal flow中的块级盒，而float、position值不为relative\static的元素是脱离BFC这一布局环境的，不参与BFC的布局
+	- 在一个块级排版上下文中，每个盒子的左外边是触碰到包含块的左边的（对于从右向左的排版，则相反），即使在有浮动元素参与的情况下也是如此(即使一个盒子的行盒是因为浮动而收缩了的)，除非这个盒子新建了一个块级排版上下文(在某些情况下这个盒子自身会因为floats而变窄)。
+	- 应用：
+		- 边距合并
+		- 浮动的高度塌陷问题
+		- 让文字环绕块级元素的方法
+		- margin的折叠 
+
+5. 要求大容器宽度自由伸缩的情况下，A/B/C三个元素的宽度比始终是1:1:1，如何实现？
+	- 弹性布局:
+
+		```
+		.wrapper{
+		    display: flex;
+		}
+		.A,.B,.C{
+		    flex: 1;
+		    height: 100px;
+		    border: 1px solid red;
+		}
+		```
+		```
+		.wrapper{
+			font-size: 0;
+			width:100%;		
+      	}
+		.A,.B,.C{
+		   display: inline-block;
+			width:33.3%;
+			box-sizing: border-box;
+			height: 100px;
+			border: 1px solid red;
+		}//inline-block记得要把元素之间的空格清掉font-size: 0;
+		```
+		```
+		 .wrapper{
+            width:100%;
+            overflow: hidden;
+        }
+        .A,.B,.C{
+            float: left;
+            width:33.3%;
+            box-sizing: border-box;
+            height: 100px;
+            border: 1px solid red;
+        }//这种方法记得清除浮动
+		```
+
+6. 居中
+	- 已知子元素宽高:100px;
+	
+	```
+	.wrapper{
+		position: relative;
+	}
+	.A{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -50px;
+		margin-top: -50px;
+		height: 100px;
+		width: 100px;
+	}
+	```
+	```
+	.wrapper{
+	    position: relative;
+	}
+	.A{
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    bottom: 0;
+	    right: 0;
+	    margin: auto;
+	    height: 100px;
+	    width: 100px;
+	}
+	```
+	- 宽高未知
+
+	```
+	.wrapper{
+		position: relative;
+	}
+	.A{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate3d(-50%, -50%, 0);
+	}
+	```
+	```
+	.wrapper{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	```
+	```
+	.wrapper{
+        text-align: center;
+    }
+    .A{
+        display: inline-block;
+        vertical-align: middle;
+        background: red;
+    }
+    .null{
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+    }//null为添加一个行级块元素给.A用于垂直对齐的。
+	```
+
+	
 # js
 1. **柯里化**
 	- 柯里化又称部分求值。一个柯里化的函数首先会接受一些参数，接受这些参数之后，函数并不会立即求值，而是继续返回另一个函数，刚才传入的参数在函数形成的闭包中被保存起来。待到函数被真正需要求值的时候，之前传入的所有参数都会被一次性用于求值。
