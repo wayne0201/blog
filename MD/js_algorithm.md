@@ -79,6 +79,8 @@ let insertionSort = (arr = []) => {
 ```
 
 ## 快速排序
+#### 算法原理
+- 通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
 
 #### js实现
 
@@ -101,3 +103,38 @@ let qSort = (arr) => {
   return qSort(left).concat([mid], qSort(right));
 }
 ```
+
+## 归并排序
+#### 算法原理
+- 采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。
+
+#### js实现
+
+```
+function mergeSort(arr) {  //采用自上而下的递归方法
+    var len = arr.length;
+    if(len == 1) {
+        return arr;
+    }
+    var middle = Math.floor(len / 2),
+        left = arr.slice(0, middle),
+		right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right){
+    var result = [];
+    while (left.length>0 && right.length>0) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+	}
+    return [...result, ...left, ...right];
+}
+
+console.log(mergeSort(arr));
+```
+
+
