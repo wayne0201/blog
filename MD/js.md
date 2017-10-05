@@ -312,6 +312,26 @@
 	console.log(arr1);
 	```
 
+17. 针对移动端开发，不期望用户放大屏幕，只要求“视口(viewport)”宽度等于设备(屏幕)宽度，视口高度也等于设备（屏幕）高度，如何设置？
+	- `<meta name = "viewport" content = "width=device-width,height=device-height,initial-scale = 1.0,maximum-scale = 1.0">`
+	- meta viewport有6个属性：width,innitial-scale,minimum-scale,maimum-scale,height,user-scalable。
+分别为设置layout viewport的宽度、页面初始缩放值、允许用户的最小缩放值、允许用户的最大缩放值、layout viewport的高度，是否允许用户缩放。
+
+18. `data-`属性的作用是什么？
+	- 存储页面或应用程序的私有自定义数据。
+	- 可通过.dataset来获取和设置。
+	- .dataset有兼容性问题，所以可以用getAttribute/setAttribute方法来获取和设置。
+
+19. 请简述一下cookie、localStorage、sessionStorage的区别？
+	- 共同点：都是保存在浏览器端，且同源的。
+	- 区别：
+	- cookie数据始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递。而sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。
+	- 存储大小限制也不同，cookie数据不能超过4k，同时因为每次http请求都会携带cookie，所以cookie只适合保存很小的数据，如会话标识。sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+	- 数据有效期不同，sessionStorage：仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持；localStorage：始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭。
+	- 作用域不同，sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；localStorage 在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的。
+	- Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。
+	- Web Storage 的 api 接口使用更方便。
+
 ## DOM(Document Object Model 文档对象模型)
 1. 查看元素节点。
 	- **getElementById("id")**
