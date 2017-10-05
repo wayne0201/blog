@@ -6,19 +6,37 @@
 		![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)
 		
 2. 边界合并，边界塌陷？
+
 	- 边界合并是指上下两个元素的外边距重合在一起。
 	- 边界塌陷是指父子级的两个元素的外边距重合在一起了。
 
-3. box-sizing的概念？
-	- box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素，默认值是content-box。还可以设置为box-sizing。
-	- content-box：
-		- padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、padding之和，即 ( Element width = width + border + padding)
-		- 此属性表现为标准模式下的盒模型。
-	- border-box：
-		- padding和border被包含在定义的width和height之内。对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，即 ( Element width = width )
-		- 此属性表现为怪异模式下的盒模型。
+3. 标准模式与怪异模式区别？
+
+	- 在标准模式页面按照HTML,CSS的定义渲染，而在怪异模式就是浏览器为了兼容很早之前针对旧版本浏览器设计，并未严格遵循W3C标准而产生的一种页面渲染模式。浏览器基于页面中文件类型描述的存在以决定采用哪种渲染模式，如果存在一个完整的DOCTYPE则浏览器将会采用标准模式，如果缺失就会采用怪异模式。下面介绍标准模式和怪异模式之间的区别。
+	- 二者最主要区别是盒模型的不同。
+	
+		- ![](https://github.com/lj614418910/blog/blob/master/images/20170321180119900.png)
+	
+		- ![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)	
+
+	- 图片元素的垂直对齐方式：对于inline元素和table-cell元素，标准模式下vertical-align属性默认取值为baseline，在怪异模式下，table单元格中的图片的vertical-align属性默认取值为bottom，因此在图片底部会有及像素的空间。
+	- `<table>`元素中的字体：CSS中，对于font的属性都是可以继承的，怪异模式下，对于table元素，字体的某些元素将不会从body等其他封装元素中继承得到，特别是font-size属性。
+	- 内联元素的尺寸：标准模式下，non-replaced inline元素无法自定义大小，怪异模式下，定义这些元素的width，height属性可以影响这些元素显示的尺寸。
+	- 元素的百分比高度：
+		- CSS中对于元素的百分比高度规定如下：百分比为元素包含块的高度，不可为负值，如果包含块的高度没有显示给出，该值等同于auto，所以百分比的高度必须在父元素有高度声明的情况下使用。
+		- 当一个元素使用百分比高度时，标准模式下，高度取决于内容变化，怪异模式下，百分比高度被正确应用。
+	- 元素溢出的处理：标准模式下，overflow取默认值visible，在怪异模式下，该溢出会被当做扩展box来对待，即元素的大小由其内容决定，溢出不会裁减，元素框自动调整，包含溢出内容。
+	- box-sizing的概念？
+		- box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素，默认值是content-box。还可以设置为box-sizing。
+		- content-box：
+			- padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、padding之和，即 ( Element width = width + border + padding)
+			- 此属性表现为标准模式下的盒模型。
+		- border-box：
+			- padding和border被包含在定义的width和height之内。对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，即 ( Element width = width )
+			- 此属性表现为怪异模式下的盒模型。
 
 4. 简要说下BFC(Block Formatting Context)是什么？有哪些应用？
+
 	- bfc全称是block format context——块级格式化上下文
 	- 浮动元素、绝对定位元素，不是块级盒的块级包含块(比如inline-block、table-cell、table-capation)和overflow值不为visible的块级盒子为它们的内容建立了一个新的块级排版上下文。
 	- 在一个块级排版上下文中，盒子是从包含块顶部开始，垂直的一个接一个的排列的，相邻两个盒子之间的垂直的间距是被margin属性所决定的，在一个块级排版上下文中相邻的两个块级盒之间的垂直margin是折叠的。参与BFC的布局的只有普通流normal flow中的块级盒，而float、position值不为relative\static的元素是脱离BFC这一布局环境的，不参与BFC的布局
@@ -473,24 +491,7 @@
 	- Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。
 	- Web Storage 的 api 接口使用更方便。
 
-20. 标准模式与怪异模式区别？
-	- 在标准模式页面按照HTML,CSS的定义渲染，而在怪异模式就是浏览器为了兼容很早之前针对旧版本浏览器设计，并未严格遵循W3C标准而产生的一种页面渲染模式。浏览器基于页面中文件类型描述的存在以决定采用哪种渲染模式，如果存在一个完整的DOCTYPE则浏览器将会采用标准模式，如果缺失就会采用怪异模式。下面介绍标准模式和怪异模式之间的区别。
-	- 二者最主要区别是盒模型的不同。
-	
-		![](https://github.com/lj614418910/blog/blob/master/images/20170321180119900.png)
-	
-		![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)
-		
-	- 图片元素的垂直对齐方式：对于inline元素和table-cell元素，标准模式下vertical-align属性默认取值为baseline，在怪异模式下，table单元格中的图片的vertical-align属性默认取值为bottom，因此在图片底部会有及像素的空间。
-	- <table>元素中的字体：CSS中，对于font的属性都是可以继承的，怪异模式下，对于table元素，字体的某些元素将不会从body等其他封装元素中继承得到，特别是font-size属性。
-	- 内联元素的尺寸：标准模式下，non-replaced inline元素无法自定义大小，怪异模式下，定义这些元素的width，height属性可以影响这些元素显示的尺寸。
-	- 元素的百分比高度：
-		- CSS中对于元素的百分比高度规定如下：百分比为元素包含块的高度，不可为负值，如果包含块的高度没有显示给出，该值等同于auto，所以百分比的高度必须在父元素有高度声明的情况下使用。
-		- 当一个元素使用百分比高度时，标准模式下，高度取决于内容变化，怪异模式下，百分比高度被正确应用。
-	- 元素溢出的处理：标准模式下，overflow取默认值visible，在怪异模式下，该溢出会被当做扩展box来对待，即元素的大小由其内容决定，溢出不会裁减，元素框自动调整，包含溢出内容。
-
-21. 使用jquery，找到id为'selector'的select标签中拥有'data-target'属性，且值为'isme'的option的值。
-
+20. 使用jquery，找到id为'selector'的select标签中拥有'data-target'属性，且值为'isme'的option的值。
 	```
 	var value;
 	$('select#selector option').each(function(){
@@ -502,8 +503,8 @@
 	```
 	var value = $('#selector option[data-target="isme"]').val();
 	```
-	
-22. 请优化以下代码
+
+21. 请优化以下代码
 	
 	```
 	for (var i = 0; i < document.getElementsByTagName('a').length; i ++) {
@@ -530,7 +531,7 @@
     }
 	```
 	
-23. 设计一个算法，将两个有序数组，合并为一个有序数组，请不要使用concat以及sort方法。
+22. 设计一个算法，将两个有序数组，合并为一个有序数组，请不要使用concat以及sort方法。
 
 	```
 	function merge(arr1, arr2){
