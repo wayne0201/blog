@@ -158,27 +158,24 @@
 		Object._assignCopy = function(...arr){
 			var _self = arr.shift() || {}
 			arr.forEach(function(item){
-				arr.forEach(function(item){
-					Object.keys(item).forEach(key => {
-						if(typeof (item[key]) == 'object'){
-		                	_self[key] = ((_self[key]) instanceof Array)? []:{}
-		                	Object._assignCopy( _self[key],item[key])
-		            	}else{
-		                	_self[key] = item[key]
-		            	}
-					})
+				Object.keys(item).forEach(key => {
+					if(typeof (item[key]) == 'object'){
+	                	_self[key] = Array.isArray(item[key]) ? [] : {}
+	                	Object._assignCopy( _self[key],item[key])
+	            	}else{
+	                	_self[key] = item[key]
+	            	}
 				})
-		    	for(var prop in item){
-		        	if(item.hasOwnProperty(prop)){
-		            	if(typeof (item[prop]) == 'object'){
-		                	_self[prop] = ((_self[prop]) instanceof Array)? []:{}
-		                	Object._assignCopy( _self[prop],item[prop])
-		            	}else{
-		                	_self[prop] = item[prop]
-		            	}
-		        	}
-		        
-				}
+		    	// for(var prop in item){
+				//     if(item.hasOwnProperty(prop)){
+				//         if(typeof (item[prop]) == 'object'){
+				//             _self[prop] = ((item[prop]) instanceof Array)? []:{}
+				//             Object._assignCopy( _self[prop],item[prop])
+				//         }else{
+				//             _self[prop] = item[prop]
+				//         }
+				//     }
+				// }
 			})
 			return _self;
 		}

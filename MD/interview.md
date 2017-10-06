@@ -202,7 +202,7 @@ console.log(3);
 - 写一个能遍历对象和数组的通用 forEach 函数
 
 #### 日期
-```
+``` javascript
 Date.now() //获取当前时间毫秒数
 var dt = new Date() 
 dt.getTime() //获取毫秒数

@@ -364,7 +364,7 @@ const connect = (mapStateToProps, mapDispatchToProps) => {
 
 - 使用方法(其实里面第一个参数就是最早在 `<Provider store = {store}>`传入的`store`，于是可以在子组件上访问`store`里的属性)
 
-```
+``` javascript
 const mapStateToProps = (state, [ownProps]) => {
   return {
     todos : state.todos

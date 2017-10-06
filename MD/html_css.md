@@ -1,9 +1,9 @@
 # HTML & CSS
 1. 盒模型的宽高值计算方式？
 	
-		![](https://github.com/lj614418910/blog/blob/master/images/20170321180119900.png)
+	![](https://github.com/lj614418910/blog/blob/master/images/20170321180119900.png)
 	
-		![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)
+	![](https://github.com/lj614418910/blog/blob/master/images/20170321180159166.png)
 		
 2. 边界合并，边界塌陷？
 
@@ -51,7 +51,7 @@
 5. 要求大容器宽度自由伸缩的情况下，A/B/C三个元素的宽度比始终是1:1:1，如何实现？
 	- 弹性布局:
 
-		```
+		``` css
 		.wrapper{
 		    display: flex;
 		}
@@ -61,7 +61,7 @@
 		    border: 1px solid red;
 		}
 		```
-		```
+		``` css
 		.wrapper{
 			font-size: 0;
 			width:100%;		
@@ -74,7 +74,7 @@
 			border: 1px solid red;
 		}//inline-block记得要把元素之间的空格清掉font-size: 0;
 		```
-		```
+		``` css
 		 .wrapper{
             width:100%;
             overflow: hidden;
@@ -92,7 +92,7 @@
 	- 已知子元素宽高:100px;
 	- div宽高已知，可利用`position:absolute`绝对定位，用`top:50%;left:50%`将div的左上角置于容器的中点，再利用`margin-top:(负的1/2的div高度);margin-left: (负的1/2的div宽度)`;将div的中点和容器中点重合。
 	
-	```
+	``` css
 	.wrapper{
 		position: relative;
 	}
@@ -109,7 +109,7 @@
 	
 	- div宽高已知，可利用`position:absolute`绝对定位，然后用`top:0;left:0;bottom:0;right:0;`和`margin:auto`结合起来使div位于容器中间。其原理是`margin:auto`可分配剩余空间，平均分配所占位的剩余空间。
 	
-	```
+	``` css
 	.wrapper{
 	    position: relative;
 	}
@@ -127,7 +127,7 @@
 	
 	- div宽高未知，可利用`position:absolute`绝对定位，用`top:50%;left:50%`将div的左上角置于容器的中点，再利用`transfrom:translate(-50%,-50%)`,translate的50%是相对于div本身所占的宽高的。
 
-	```
+	``` css
 	.wrapper{
 		position: relative;
 	}
@@ -141,14 +141,14 @@
 	
 	- flex布局的居中，在父元素上设置`display:flex;justify-content:center;align-items:center`,flex布局中justify-content和align-items并不是上下左右对齐的意思，而分别是在主轴上对齐方式和在交叉轴上的对齐。<br/>而flex-direction是设置flex布局的主轴的方向（即项目的排列方向）。`row（默认值）`：主轴为水平方向，起点在左端。`row-reverse`：主轴为水平方向，起点在右端。`column`：主轴为垂直方向，起点在上沿。`column-reverse`：主轴为垂直方向，起点在下沿。
 
-	```
+	``` css
 	.wrapper{
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 	```
-	```
+	``` css
 	.wrapper{
         text-align: center;
     }
@@ -170,7 +170,7 @@
 	- 父级div定义 `overflow: auto`,触发bfc。我们可以使用hiddent和auto值来清除浮动，但切记不能使用visible值。
 	- 主流清除浮动方法：原理和第一种方法一样，但是使用伪元素可以不用在html添加，结构样式分离。而且用`zoom:1`兼容低版本ie
 	
-		```
+		``` css
 		.box {
 			zoom:1;
 		} /*==for IE6/7 Maxthon2==*/
@@ -191,7 +191,7 @@
 	
 9. 单行打点
 
-	``` 
+	``` css
 	overflow: hidden; //溢出部分隐藏
 	white-space: nowrap; //不换行
 	text-overflow: ellipsis; //末尾打点
@@ -199,7 +199,7 @@
 
 10. 多行打点
 
-	```
+	``` css
 	overflow : hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -209,7 +209,7 @@
 	
 11. 双飞翼布局(三栏布局)
 
-	```
+	``` html
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
