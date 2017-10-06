@@ -192,19 +192,23 @@
 9. 单行打点
 
 	``` css
-	overflow: hidden; //溢出部分隐藏
-	white-space: nowrap; //不换行
-	text-overflow: ellipsis; //末尾打点
+	.class {
+		overflow: hidden; //溢出部分隐藏
+		white-space: nowrap; //不换行
+		text-overflow: ellipsis; //末尾打点
+	}
 	```
 
 10. 多行打点
 
 	``` css
-	overflow : hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;		
+	.class {
+		overflow : hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}		
 	```
 	
 11. 双飞翼布局(三栏布局)
