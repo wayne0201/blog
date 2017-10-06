@@ -111,17 +111,17 @@
 	
 	``` css
 	.wrapper{
-	    position: relative;
+	    	position: relative;
 	}
 	.A{
-	    position: absolute;
-	    left: 0;
-	    top: 0;
-	    bottom: 0;
-	    right: 0;
-	    margin: auto;
-	    height: 100px;
-	    width: 100px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		height: 100px;
+		width: 100px;
 	}
 	```
 	
