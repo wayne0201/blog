@@ -28,7 +28,7 @@
 	 	* **status** 服务器返回的状态码(200为请求成功)。
 	 	* **responseText** 服务器进程返回数据的文本版本。
 	 
-	```
+	``` javascript
 	function AJAX(json) {
 		var url = json.url,
 			method = json.method,
@@ -87,7 +87,7 @@
 <br/>3）若 a 大于 b，则返回一个大于 0 的值。
 		* 因为数字比较的时候会选第一位数字比较，多位数的时候会不准。所以要修改一下里面的回调函数。
 	
-	```
+	``` javascript
 	arr.sort(function sortNumber(a,b){
 		return a - b
 	})
@@ -100,7 +100,7 @@
 
 8. 数组去重
 
-	```
+	``` javascript
 	Array.prototype.unique = function () {
 	      var len = this.length,
 	      arr = [],
@@ -117,44 +117,57 @@
 
 9. 深度克隆
 
-	```
-	function deepCopy(src,tar){
-	      var tar= tar|| {} ;
-	      for (var prop in src){
-	            if (typeof (src[prop]) == 'object'){
-	                   tar[prop] = (src[prop] instanceof Array ) ? [] : {};
-	                  deepCopy(src[prop],tar[prop]);
-	            }else {
-	                   tar[prop] = src[prop];
-	            }
-	      }
-	 
-	      return tar;
+	``` javascript
+	function deepCopy (obj, cache = []) {
+		if (obj === null || typeof obj !== 'object') {
+			return obj
+		}
+		const hit = list.filter(c => c.original === obj)[0]
+		if (hit) {
+		return hit.copy
+		}
+		const copy = Array.isArray(obj) ? [] : {}
+		cache.push({
+			original: obj,
+			copy
+		})
+		Object.keys(obj).forEach(key => {
+			copy[key] = deepCopy(obj[key], cache)
+		})
+	  	return copy
 	}
 	``` 
 	
 10. assign实现
 	- Object.assign()实现（浅层克隆）
 
-		```
-		Object.prototype._assign = function(...arr){
+		``` javascript
+		Object._assign = function(...arr){
 			var _self = arr.shift() || {}
 			arr.forEach(function(item){
-				for(var prop in item){
-					if(item.hasOwnProperty(prop)){
-						_self[prop] = item[prop]
-					}
-				}
+				Object.keys(item).forEach(key => {
+					_self[key] = item[key]
+				})
 			})
 			return _self;
 		}
 		```
 	- Object.assign()实现（深层克隆）
 	
-		```
-		Object.prototype._assignCopy = function(...arr){
+		``` javascript
+		Object._assignCopy = function(...arr){
 			var _self = arr.shift() || {}
 			arr.forEach(function(item){
+				arr.forEach(function(item){
+					Object.keys(item).forEach(key => {
+						if(typeof (item[key]) == 'object'){
+		                	_self[key] = ((_self[key]) instanceof Array)? []:{}
+		                	Object._assignCopy( _self[key],item[key])
+		            	}else{
+		                	_self[key] = item[key]
+		            	}
+					})
+				})
 		    	for(var prop in item){
 		        	if(item.hasOwnProperty(prop)){
 		            	if(typeof (item[prop]) == 'object'){
@@ -173,7 +186,7 @@
 	
 11. 实现bind函数
 
-	```
+	``` javascript
 	Function.prototype.bind = function (that){
 	    var _this = this;
 	    var slice = Array.prototype.slice;
@@ -191,7 +204,7 @@
 	
 13. filter实现
 
-	```
+	``` javascript
 	Array.prototype._filter = function (callback,thisVal){
 		var _self = thisVal || this;
 		var _arr = [];
@@ -206,7 +219,7 @@
 
 	map实现
 	
-	```
+	``` javascript
 	Array.prototype._map = function (callback,thisVal){
 		var _self = thisVal || this;
 		var _arr = [];
@@ -222,7 +235,7 @@
 14. jsop实现
 	- 前端封装函数
 	
-		```
+		``` javascript
 		function jsonp(url,data, callbackName){
 			var url = url || "http://localhost:8080";
 			var callbackName = callbackName || "callback";
@@ -250,7 +263,7 @@
 	- node后端封装
 
 
-		```
+		``` javascript
 		const http = require('http');
 		const url = require('url');
 		var data = {name:'li',year:18};
@@ -267,7 +280,7 @@
 
 15. find函数实现
 
-	```
+	``` javascript
 	function findIt(obj, str){
 		var Obj = obj;
 		var flag = true;
@@ -289,7 +302,7 @@
 	```
 16. 两个栈生成一个队列
 
-	```
+	``` javascript
 	var arr1 = [1,2,3,4,5];
 	var arr2 = []
 	Array.prototype.enqueue = function(ele){
@@ -333,7 +346,8 @@
 	- Web Storage 的 api 接口使用更方便。
 
 20. 使用jquery，找到id为'selector'的select标签中拥有'data-target'属性，且值为'isme'的option的值。
-	```
+
+	``` javascript
 	var value;
 	$('select#selector option').each(function(){
 	    if ($(this).data('target') == 'isme') {
@@ -341,13 +355,14 @@
 	    }
 	});
 	```
-	```
+	
+	``` javascript
 	var value = $('#selector option[data-target="isme"]').val();
 	```
 
 21. 请优化以下代码
 	
-	```
+	``` javascript
 	for (var i = 0; i < document.getElementsByTagName('a').length; i ++) {
 		document.getElementsByTagName('a')[i].onmouseover = function() {
 			this.style.color = 'red';
@@ -357,7 +372,7 @@
 		}
 	}
 	```
-	```
+	``` javascript
 	//优化后
 	var elems = document.getElementsByTagName('a');
     var len = document.getElementsByTagName('a').length;
@@ -374,23 +389,17 @@
 	
 22. 设计一个算法，将两个有序数组，合并为一个有序数组，请不要使用concat以及sort方法。
 
-	```
+	``` javascript
 	function merge(arr1, arr2){
-        var arr = [];
-        while(arr1.length != 0 || arr2.length != 0){
-            if(arr1[0] == undefined){
-                arr.push(arr2.shift());
-            }else if(arr2[0] == undefined) {
-                arr.push(arr1.shift());
-            }else{
-                if(arr1[0] <= arr2[0]){
-                    arr.push(arr1.shift());
-                } else {
-                    arr.push(arr2.shift()); 
-                }
+        var result = [];
+        while (arr1.length >0 && arr2.length >0) {
+            if (arr1[0] < arr2[0]) {
+                result.push(arr1.shift());
+            } else {
+                result.push(arr2.shift());
             }
         }
-        return arr;
+        return [...result, ...arr1, ...arr2];
     }
 	```
 	

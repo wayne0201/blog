@@ -18,7 +18,7 @@
 
 - Action 就是一个描述“发生了什么”的普通对象。比如：
 
-```
+``` javascript
  { type: 'LIKE_ARTICLE', articleId: 42 };
  { type: 'FETCH_USER_SUCCESS', response: { id: 3, name: 'Mary' } };
  { type: 'ADD_TODO', text: 'Read the Redux docs.'};
@@ -30,7 +30,7 @@
 
 - Store 会把两个参数传入 `reducer`： 当前的 `state` 树和 `action`。例如，在这个 `todo` 应用中，根 `reducer` 可能接收这样的数据：
 
-```
+``` javascript
  // 当前应用的 state（todos 列表和选中的过滤器）
  let previousState = {
    visibleTodoFilter: 'SHOW_ALL',
@@ -59,7 +59,7 @@
 
 -下面演示 combineReducers() 如何使用。假如你有两个 reducer：一个是 todo 列表，另一个是当前选择的过滤器设置：
 
-```
+``` javascript
  function todos(state = [], action) {
    // 省略处理逻辑...
    return nextState;
@@ -78,7 +78,7 @@
  
 - 当你触发 `action` 后，`combineReducers` 返回的 `todoApp` 会负责调用两个 reducer：
 
-```
+``` javascript
  let nextTodos = todos(state.todos, action);
  let nextVisibleTodoFilter = visibleTodoFilter(state.visibleTodoFilter, action);
 ```
@@ -86,7 +86,7 @@
 - 然后会把两个结果集合并成一个 state 树：
 
 
-```
+``` javascript
  return {
    todos: nextTodos,
    visibleTodoFilter: nextVisibleTodoFilter
@@ -160,7 +160,7 @@
 
 	- 包含`getState()`，`dispatch(action)`，`subscribe(listener)`；本函数近似源码，可简单实现功能与帮助理解`createStore`的原理
 	
-	```
+	``` javascript
 	const createStore = (reducer) => {
 	    let state; //声明一个变量承接状态
 	    let list = [];//声明一个数组用于储存监听函数
@@ -195,7 +195,7 @@
 
 	- 将多个不同的`reducer`作为对象的属性传入`combineReducers({})`函数中，
 
-```
+``` javascript
 const rootReducer = combineReducers({
  	reducer1,
  	reducer2，
@@ -207,7 +207,7 @@ const rootReducer = combineReducers({
 
 	- (Function)：一个调用 reducers 对象里所有 reducer 的 reducer，并且构造一个与 reducers 对象结构相同的 state 对象。
 
-	```
+	``` javascript
 		let store = createStore(rootReducer)
 		//store = {
 			reducer1: ... ,
@@ -219,7 +219,7 @@ const rootReducer = combineReducers({
 
 - #### 模拟实现combineReducers
 
-```
+``` javascript
 //研究逻辑看这个
 const combineReducers = (reducers) => {
   return (state = {}, action) => {
@@ -249,7 +249,7 @@ const combineReducers = (reducers) => (state = {}, action) => Object.keys(reduce
 
 	- 在外层定义一个`getChildContext`方法，在父层制定`childContextTypes`。
 	
-	```
+	``` javascript
 	class Provider extends Component{
 		getChildContext() {
 	  		return {store: ...};
@@ -268,7 +268,7 @@ const combineReducers = (reducers) => (state = {}, action) => Object.keys(reduce
 
   - 在内层设置组件的`contextTypes`后，即可在组件里通过`this.context.`来访问。
   
-  ```
+  ``` javascript
   	class child extends Component{
 	   render(){
 	   		const store = this.context.store;
@@ -294,7 +294,7 @@ const combineReducers = (reducers) => (state = {}, action) => Object.keys(reduce
 
 - `<Provider />`主要源码
 
-```
+``` javascript
 export default class Provider extends Component {
   getChildContext() {
     return { store: this.store }
@@ -313,7 +313,7 @@ export default class Provider extends Component {
 ```
 - 用法
 
-```
+``` javascript
 ReactDom.render(
 	<Provider store = {store}>
 	  <App />
@@ -328,7 +328,7 @@ ReactDom.render(
 - 上面代码看似那么长，但其实理解起来不太难，前四个参数是选填属性，根据需求填入即可。`connect(...)`调用后会返回一个函数这个函数可传一个参数，即你需要绑定的组件。
 - 模拟实现`connect`函数,只针对前两个关键参数。
 
-```
+``` javascript
 const connect = (mapStateToProps, mapDispatchToProps) => {
   return (WrapperComponent) => {
     class Connect extends Component {
@@ -376,7 +376,7 @@ const mapStateToProps = (state, [ownProps]) => {
 - 官方解释： 如果传递的是一个对象，那么每个定义在该对象的函数都将被当作 Redux `action creator`，而且这个对象会与 Redux `store` 绑定在一起，其中所定义的方法名将作为属性名，合并到组件的 `props` 中。如果传递的是一个函数，该函数将接收一个 `dispatch` 函数，然后由你来决定如何返回一个对象，这个对象通过 `dispatch` 函数与 `action creator` 以某种方式绑定在一起（提示：你也许会用到 Redux 的辅助函数 bindActionCreators()）。如果你省略这个 `mapDispatchToProps` 参数，默认情况下，`dispatch` 会注入到你的组件 `props` 中。如果指定了该回调函数中第二个参数 `ownProps`，该参数的值为传递到组件的 `props`，而且只要组件接收到新 `props`，`mapDispatchToProps` 也会被调用。
 - 使用方法（用于传递方法）。其实总而言之，`mapStateToProps`是用来传递属性状态的，而`mapDispatchToProps`是用来传递改变的方法的。
 
-```
+``` javascript
 const mapDispatchToProps = (dispatch, [ownProps]) => {
   return{
 	 ... : () => {

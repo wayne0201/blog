@@ -33,7 +33,7 @@
 	- 引用类型：另外开辟内存空间，将那个空间的地址存在变量里面。(为了共用内存空间)
 - **typeof** 运算符详解
 
-	```
+	``` javascript
 	typeof undefined //undefined
 	typeof 'abc' //string
 	typeof 123 //nubmer
@@ -111,7 +111,7 @@
 #### 写一个贴近实际开发原型链继承
 - 写一个封装DOM查询的例子
 
-```
+``` javascript
 function Elem(id){
     this.elem = document.getElementById(id)
 }
@@ -130,7 +130,7 @@ Elem.prototype.on = function (type, fn){
 }
 var div1 = new Elem ('div1')
 ```
-```
+``` javascript
 class Elem {
     constructor(id){
         this.elem = document.getElementById(id)
@@ -178,7 +178,7 @@ var div1 = new Elem ('div1')
 
 #### 异步和单线程
 
-```
+``` javascript
 console.log(1);
 setTimeout(function(){
 	console.log(2);
@@ -232,7 +232,7 @@ dt.getSeconds() //秒(0 - 59)
 #### 解答
 - 获得2017-06—10格式的日期
 
-```
+``` javascript
 function formatDate(dt){
     var dt = dt || new Date();
 
@@ -254,7 +254,7 @@ console.log(formatDate(dt))
 
 - 获得随机数，要求是长度一致的字符串格式
 
-```
+``` javascript
 var random1 = Math.random()
 var random2 = random + '0000000000'
 var random3 = random2.slice(0, 10)
@@ -263,7 +263,7 @@ console.log(random3)
 
 - 写一个能遍历对象和数组的通用 forEach 函数
 
-```
+``` javascript
 function forEach(obj, fn){
 	var key;
 	if(obj instanceof Array){
@@ -323,7 +323,7 @@ function forEach(obj, fn){
 - history
 
 ### navigator & screen
-```
+``` javascript
 // navigator
 var isChrome = ua.indexOf('Chrome')
 console.log(isChrome)
@@ -334,7 +334,7 @@ console.log(screen.height)
 ```
 
 ### location & history
-```
+``` javascript
 //location
 console.log(location.href)
 console.log(location.host)
@@ -371,7 +371,7 @@ history.forward()
 
 #### XMLHttpRequest
 
-```
+``` javascript
 function AJAX(json) {
 	var url = json.url,
 		method = json.method,
@@ -485,7 +485,7 @@ function AJAX(json) {
 - a-util.js aGetFormatDate函数 使用getFormatDate
 - a.js 使用aGetFormatDate
 
-```
+``` javascript
 //util.js
 funcvtion getFormatDate(date, type) {
 	//......
@@ -514,7 +514,7 @@ console.log(aGetFormatDate(dt))
 - 全局require函数
 - 依赖JS会自动、异步加载
 
-```
+``` javascript
 //util.js 
 define(function () {
 	return {
@@ -560,7 +560,7 @@ require(['./a.js'], function (a) {
 - 需要构建工具支持
 - 一般和 npm 一起使用
 
-```
+``` javascript
 //util.js
 module.exports = {
 	getFormatDate: function (date, type) {

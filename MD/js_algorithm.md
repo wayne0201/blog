@@ -11,7 +11,7 @@
 
 #### JS实现
 
-```
+``` javascript
 let bubbleSort = (arr = []) => { 
 	//冒泡排序
     let len = arr.length,
@@ -36,7 +36,7 @@ let bubbleSort = (arr = []) => {
 
 #### JS实现
 
-```
+``` javascript
 let selectionSort = (arr = []) => {  
 	//选择排序
     let len = this.length,
@@ -61,7 +61,7 @@ let selectionSort = (arr = []) => {
 
 #### JS实现
 
-```
+``` javascript
 let insertionSort = (arr = []) => { 
 	//插入排序
     let len = this.length,
@@ -84,7 +84,7 @@ let insertionSort = (arr = []) => {
 
 #### js实现
 
-```
+``` javascript
 let qSort = (arr) => {
   let len = arr.length;
   if(!len){
@@ -110,7 +110,7 @@ let qSort = (arr) => {
 
 #### js实现
 
-```
+``` javascript
 function mergeSort(arr) {  //采用自上而下的递归方法
     var len = arr.length;
     if(len == 1) {

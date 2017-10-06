@@ -7,7 +7,7 @@
 
 ###实际使用
 
-```
+``` html
 <div id="app">
   ...
   <router-view></router-view>
@@ -15,7 +15,7 @@
 </div>
 ```
 
-```
+``` javascript
 import VueRouter from 'vue-router'
 var router = new VueRouter({
   routes: [
