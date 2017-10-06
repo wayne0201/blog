@@ -399,7 +399,36 @@
         return [...result, ...arr1, ...arr2];
     }
 	```
-	
+
+23. 请完善以下“环”检查器函数 cycleDetector，当入参对象中有环时返回 true，否则返回 false。
+
+``` javascript
+function cycleDetector(obj) {   
+  // 请添加代码
+}
+```
+```javascript
+function cycleDetector(obj) {
+    let hasCircle = false,
+        cache = [];
+    (function(obj) {
+        Object.keys(obj).forEach(key => {
+            const value = obj[key]
+            if (typeof value == 'object' && value !== null) {
+                const index = cache.indexOf(value)
+                if (index !== -1) {
+                    hasCircle = true
+                    return
+                } else {
+                    cache.push(value)
+                    arguments.callee(value)
+                }
+            }
+        })
+    })(obj)
+    return hasCircle
+}
+```
 
 ## DOM(Document Object Model 文档对象模型)
 1. 查看元素节点。
