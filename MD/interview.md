@@ -462,8 +462,135 @@ function AJAX(json) {
 - IOS safari 隐藏模式下，getItem(key)会报错
 - 建议使用try-catch封装
 
-#### cookie和sessionStorage、localStorage有什么区别
-- 
+## Git
+### 常用Git命令
+- git add .
+- git commit -m "xxx"
+- git push origin master
+- git pull origin master
+- git branch 
+- git checkout -b xxx/git checkout xxx
+- git merge xxx
+
+## 模块化
+- 这就是一个面试的问题
+### 知识点
+- 不使用模块化的情况
+- 使用模块化的情况
+- AMD
+- CommonJS
+
+### 不使用模块化
+- util.js getFormatDate函数
+- a-util.js aGetFormatDate函数 使用getFormatDate
+- a.js 使用aGetFormatDate
+
+```
+//util.js
+funcvtion getFormatDate(date, type) {
+	//......
+}
+
+//a-util.js
+function aGetFormatDate(data) {
+	return getFormatDate(data, 2)
+}
+
+//a.js
+var dt = new Date();
+console.log(aGetFormatDate(dt))
+
+//html里
+<script src="util.js"></script>
+<script src="a-util.js"></script>
+<script src="a.js"></script>
+//这些代码中的函数必须是全局变量，才能暴露给使用方。全局变量污染
+//a.js 知道要引用 a-util.js, 但是他知道还需要依赖于 util.js 吗？
+```
+
+### AMD
+- require.js
+- 全局define函数
+- 全局require函数
+- 依赖JS会自动、异步加载
+
+```
+//util.js 
+define(function () {
+	return {
+		getFormatDate: function(data, type) {
+			//...
+		}
+	}
+})
+
+//a-util.js
+define(['./util.js'], function (util) {
+	return {
+		aGetFormatDate: function(data) {
+			return util.getFormatDate(data, 2)
+		}
+	}
+})
+
+//a.js
+define(['./a-util.js'], function (aUtil) {
+	return {
+		printDate: function (date) {
+			console.log(aUtil.aGetFormatDate(data))
+		}
+	}
+})
+
+//main.js
+require(['./a.js'], function (a) {
+	var data = new Date();
+	a.printDate(date);
+}) 
+
+//html使用
+<script src="require.min.js" data-main="./main.js"></script>
+```
+
+### CommonJS
+- node.js模块化规范，现在被大量用于前端，原因：
+- 前端开发依赖的插件和库，都可以从 npm 获取
+- 构建工具的高度自动化，使得使用 npm 的成本非常低
+- CommonJS 不会异步加载JS，而是同步一次性加载出来
+- 需要构建工具支持
+- 一般和 npm 一起使用
+
+```
+//util.js
+module.exports = {
+	getFormatDate: function (date, type) {
+		//...
+	}
+}
+
+//a-util.js
+var util = require('util.js');
+module.exports = {
+	aGetFormatDate: function (date) {
+		return util.getFormatDate(date, 2);
+	}
+}
+``` 
+
+### AMD 和	CommonJS的使用场景
+- 需要异步加载JS，使用AMD
+- 使用 npm 之后，建议使用CommonJS
+
+### 重点总结
+- AMD
+- CommonJS
+- 两者的区别
+
+## 构建工具
+- grunt
+- gulp
+- fis3(百度出的)
+- webpack
 
 ## 运行环境
 ### 前言
