@@ -415,8 +415,7 @@ function cycleDetector(obj) {
         Object.keys(obj).forEach(key => {
             const value = obj[key]
             if (typeof value == 'object' && value !== null) {
-                const index = cache.indexOf(value)
-                if (index !== -1) {
+                if (!~cache.indexOf(value)) {
                     hasCircle = true
                     return
                 } else {
