@@ -86,21 +86,21 @@ let insertionSort = (arr = []) => {
 
 ``` javascript
 let qSort = (arr) => {
-  let len = arr.length;
-  if(!len){
-    return arr;
-  }
-  let left = [];
-  let right = [];
-  let mid = arr.splice(Math.floor(len / 2), 1)[0];
-  arr.map(v => {
-    if(v > mid){
-      right.push(v);
-    }else{
-      left.push(v);
+    let len = arr.length;
+    if(!len){
+        return arr;
     }
-  })
-  return qSort(left).concat([mid], qSort(right));
+    let left = [];
+    let right = [];
+    let mid = arr.splice(Math.floor(len / 2), 1)[0];
+    arr.forEach(v => {
+        if(v > mid){
+            right.push(v);
+        }else{
+            left.push(v);
+        }
+    })
+    return [...qSort(left), mid, ...qSort(right)];;
 }
 ```
 
@@ -110,28 +110,29 @@ let qSort = (arr) => {
 
 #### js实现
 
-``` javascript
-function mergeSort(arr) {  //采用自上而下的递归方法
-    var len = arr.length;
-    if(len == 1) {
-        return arr;
-    }
-    var middle = Math.floor(len / 2),
-        left = arr.slice(0, middle),
-		right = arr.slice(middle);
-    return merge(mergeSort(left), mergeSort(right));
-}
 
-function merge(left, right){
-    var result = [];
+``` javascript
+let merge = (left, right) => {
+    let result = [];
     while (left.length>0 && right.length>0) {
         if (left[0] < right[0]) {
             result.push(left.shift());
         } else {
             result.push(right.shift());
         }
-	}
+    }
     return [...result, ...left, ...right];
+}
+
+let mergeSort = (arr) => {  //采用自上而下的递归方法
+    let len = arr.length;
+    if(len == 1) {
+        return arr;
+    }
+    let middle = Math.floor(len / 2),
+        left = arr.slice(0, middle),
+	right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));
 }
 
 console.log(mergeSort(arr));
