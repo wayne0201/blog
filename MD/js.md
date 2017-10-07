@@ -124,7 +124,7 @@
 		}
 		const hit = list.filter(c => c.original === obj)[0]
 		if (hit) {
-		return hit.copy
+			return hit.copy
 		}
 		const copy = Array.isArray(obj) ? [] : {}
 		cache.push({
