@@ -160,13 +160,13 @@
 			arr.forEach(function(item){
 				Object.keys(item).forEach(key => {
 					if(typeof (item[key]) == 'object'){
-	                	_self[key] = Array.isArray(item[key]) ? [] : {}
-	                	Object._assignCopy( _self[key],item[key])
-	            	}else{
-	                	_self[key] = item[key]
-	            	}
+	                			_self[key] = Array.isArray(item[key]) ? [] : {}
+	                			Object._assignCopy( _self[key],item[key])
+	            			}else{
+	                			_self[key] = item[key]
+	            			}
 				})
-		    	// for(var prop in item){
+		    		// for(var prop in item){
 				//     if(item.hasOwnProperty(prop)){
 				//         if(typeof (item[prop]) == 'object'){
 				//             _self[prop] = ((item[prop]) instanceof Array)? []:{}
