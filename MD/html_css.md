@@ -240,8 +240,8 @@
 			}
 			.main{
 				margin-left: 200px;
-	        	margin-right: 200px;
-	        	height: 100px;
+	        		margin-right: 200px;
+	        		height: 100px;
 				background: yellow;
 			}
 		</style>
