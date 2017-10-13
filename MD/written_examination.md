@@ -89,6 +89,23 @@
 	
 6. 实现js中的bind函数，要求除了改变this指向，还需要返回的新函数的原型链上有原有的函数和原有函数的原型。
 
+	```
+	Function.prototype.testBind = function(that){
+		var _this = this,
+			slice = Array.prototype.slice,
+			args = slice.apply(arguments,[1]),
+			fNOP = function () {},
+			bound = function(){
+				//这里的this指的是调用时候的环境
+				return _this.apply(this instanceof  fNOP ?　this : that || window, args.concat(Array.prototype.slice.apply(arguments,[0])))
+			};   
+		fNOP.prototype = _this.prototype;
+    	bound.prototype = new fNOP();
+    	return bound;
+	}
+
+	```
+
 7. 实现节流函数(是节流不是去抖)
 
 8. 实现函数function fn(arr, n, sum){...},arr是一个乱序的但是不重复的一个数组。然后在这个数组里选n个数，加起来等于sum。返回一种结果就行。比如:
