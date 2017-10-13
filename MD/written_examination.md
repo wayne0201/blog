@@ -89,7 +89,7 @@
 	
 6. 实现js中的bind函数，要求除了改变this指向，还需要返回的新函数的原型链上有原有的函数和原有函数的原型。
 
-	```
+	``` javascript
 	Function.prototype.testBind = function(that){
 		var _this = this,
 			slice = Array.prototype.slice,
