@@ -184,13 +184,18 @@
 11. 实现bind函数
 
 	``` javascript
-	Function.prototype.bind = function (that){
-	    var _this = this;
-	    var slice = Array.prototype.slice;
-	    var _arg = slice.call(argument, 1)
-	    return function(){
-	        return _this.apply(that, _arg)
-	    }
+	Function.prototype.testBind = function(that){
+		var _this = this,
+			slice = Array.prototype.slice,
+			args = slice.apply(arguments,[1]),
+			fNOP = function () {},
+			bound = function(){
+				//这里的this指的是调用时候的环境
+				return _this.apply(this instanceof  fNOP ?　this : that || window, args.concat(Array.prototype.slice.apply(arguments,[0])))
+			};   
+		fNOP.prototype = _this.prototype;
+    	bound.prototype = new fNOP();
+    	return bound;
 	}
 	```
 12. class和prototype的区别
