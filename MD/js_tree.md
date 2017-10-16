@@ -57,11 +57,14 @@
 ### 生成二叉树实现代码
 
 ``` javascript
+//API:
+//insert添加一个子树，传值Number
+//bulkInsert批量添加子树，传值Array
+//showTree返回二叉树对象
 class BinaryTree{
 	constructor() {
-		this.root = null;//树根
+		this.root = null;
 		this.Node = key => {
-			//生成一个新子树
 			let _obj = Object.create(null, {});
 			_obj.key = key;
 			_obj.left = null;
@@ -69,33 +72,36 @@ class BinaryTree{
 			return _obj;
 		}
 	}
-	insertNode (node, newNode){
-		//如何插入子树
-		if (newNode.key < node.key) {
-			if (node.left === null) {
-				node.left = newNode;
+	insert(key) {
+		let newNode = this.Node(key);
+		let _insertNode = (node, newNode) => {
+			if (newNode.key < node.key) {
+				if (node.left === null) {
+					node.left = newNode;
+				} else {
+					_insertNode(node.left, newNode)
+				}
 			} else {
-				this.insertNode(node.left, newNode)
-			}
-		} else {
-			if (node.right === null) {
-				node.right = newNode;
-			} else {
-				this.insertNode(node.right, newNode)
+				if (node.right === null) {
+					node.right = newNode;
+				} else {
+					_insertNode(node.right, newNode)
+				}
 			}
 		}
-	}
-	insert(key) {
-		//插入子树
-		let newNode = this.Node(key);
 		if (this.root === null) {
 			this.root = newNode;
 		} else {
-			this.insertNode(this.root, newNode);
+			_insertNode(this.root, newNode);
 		}
 	}
+	bulkInsert (nodes) {
+		nodes.forEach(key => {
+			//遍历数组，插入子树
+			this.insert(key);
+		})
+	}
 	showTree () {
-		//显示二叉树
 		return this.root;
 	}
 }
@@ -104,9 +110,8 @@ class BinaryTree{
 let nodes = [8,3,6,4,9,11,2,5,7];
 let binaryTree = new BinaryTree();
 
-nodes.forEach(key => {
-    binaryTree.insert(key);
-})
+binaryTree.bulkInsert(nodes);
+
 let tree = binaryTree.showTree();
 ```
 
