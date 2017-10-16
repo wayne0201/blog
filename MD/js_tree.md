@@ -61,7 +61,7 @@
 //insert添加一个子树，传值Number
 //bulkInsert批量添加子树，传值Array
 //showTree返回二叉树对象
-class BinaryTree{
+class BinaryTree {
 	constructor(tree = []) {
 		this.root = null;//树根
 		this.Node = key => {
@@ -128,4 +128,69 @@ let binaryTree = new BinaryTree(nodes);
 let tree = binaryTree.showTree();
 ```
 
+## 先序遍历、中序遍历、后序遍历
+
+- 先序遍历
+	- 根左右
+- 中序遍历
+	- 左根右 
+- 后序遍历
+	- 左右根 
+
+``` javascript
+class BinaryTree {
+	......//生成树的代码
+	inOrderTraverse (fn) {
+		//中序遍历，传入一个回调函数
+		let inOrderTraverseNode = (node, callback) => {
+			if (node !== null) {
+				inOrderTraverseNode(node.left, callback);
+				callback(node.key);
+				inOrderTraverseNode(node.right, callback);
+			}
+		}
+		inOrderTraverseNode(this.root, fn)
+	}
+
+	preOrderTraverse (fn) {
+		//先序遍历，传入一个回调函数
+		let preOrderTraverseNode = (node, callback) => {
+			if (node !== null) {
+				callback(node.key);
+				preOrderTraverseNode(node.left, callback);
+				preOrderTraverseNode(node.right, callback);
+			}
+		}
+		preOrderTraverseNode(this.root, fn)
+	}
+
+	postOrderTraverse (fn) {
+		//先序遍历，传入一个回调函数
+		let postOrderTraverseNode = (node, callback) => {
+			if (node !== null) {
+				postOrderTraverseNode(node.left, callback);
+				postOrderTraverseNode(node.right, callback);
+				callback(node.key);
+			}
+		}
+		postOrderTraverseNode(this.root, fn)
+	}
+}
+
+let nodes = [8,3,6,4,9,11,2,5,7];
+let binaryTree = new BinaryTree(nodes);
+let	arr1 = [],
+	arr2 = [],
+	arr3 = []
+
+binaryTree.inOrderTraverse(key => {
+	arr1.push(key);//中序遍历[2, 3, 4, 5, 6, 7, 8, 9, 11]
+})
+binaryTree.preOrderTraverse(key => {
+	arr2.push(key);//先序遍历[8, 3, 2, 6, 4, 5, 7, 9, 11]
+})
+binaryTree.postOrderTraverse(key => {
+	arr3.push(key);//后序遍历[2, 5, 4, 7, 6, 3, 11, 9, 8]
+})
+```
 
