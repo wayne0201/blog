@@ -179,9 +179,9 @@ class BinaryTree {
 
 let nodes = [8,3,6,4,9,11,2,5,7];
 let binaryTree = new BinaryTree(nodes);
-let	arr1 = [],
-	arr2 = [],
-	arr3 = []
+let arr1 = [],
+    arr2 = [],
+    arr3 = [];
 
 binaryTree.inOrderTraverse(key => {
 	arr1.push(key);//中序遍历[2, 3, 4, 5, 6, 7, 8, 9, 11]
