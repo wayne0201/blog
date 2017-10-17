@@ -328,9 +328,6 @@ class BinaryTree {
 
 let nodes = [8,3,6,4,9,11,2,5,7];
 let binaryTree = new BinaryTree(nodes);
-
-let inTree1 = binaryTree.showTree(2);//true
-let inTree2 = binaryTree.showTree(1);//false
 ```
 
 ## JS二叉树完整代码
