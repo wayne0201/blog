@@ -13,7 +13,7 @@
 
 ``` javascript
 let bubbleSort = (arr = []) => { 
-	//冒泡排序
+    //冒泡排序
     let len = arr.length,
         temp; 
     for (let i = 0; i < len; i++) {
@@ -38,7 +38,7 @@ let bubbleSort = (arr = []) => {
 
 ``` javascript
 let selectionSort = (arr = []) => {  
-	//选择排序
+    //选择排序
     let len = this.length,
         temp,
         minIndex;
@@ -63,7 +63,7 @@ let selectionSort = (arr = []) => {
 
 ``` javascript
 let insertionSort = (arr = []) => { 
-	//插入排序
+    //插入排序
     let len = this.length,
         temp; 
     for (let i = 1; i < len; i++) {
@@ -131,7 +131,7 @@ let mergeSort = (arr) => {  //采用自上而下的递归方法
     }
     let middle = Math.floor(len / 2),
         left = arr.slice(0, middle),
-	right = arr.slice(middle);
+    right = arr.slice(middle);
     return merge(mergeSort(left), mergeSort(right));
 }
 

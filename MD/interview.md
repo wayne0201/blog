@@ -2,17 +2,17 @@
 ## 前言
 ### 从几道面试题开始
 - JS中使用 **typeof** 能得到哪些类型？ 
-	- 考点：**js变量类型**
+    - 考点：**js变量类型**
 - 何时用 **==** 何时用 **===**?
-	- 考点：**强制类型转换**
+    - 考点：**强制类型转换**
 - **window.onload** 和 **DOMContentLoaded** 的区别？
-	- 考点：**浏览器渲染过程**
+    - 考点：**浏览器渲染过程**
 - 用JS创建10个`<a>`标签，点击的时候弹出相应的序号。
-	- 考点：**作用域** 
+    - 考点：**作用域** 
 - 简述如何实现一个**模块加载器**，实现类似**require.js**的基本功能。
-	- 考点：**JS模块化** 
+    - 考点：**JS模块化** 
 - 实现数组的**随机排序**
-	- 考点：**JS基础算法**	 
+    - 考点：**JS基础算法**  
 
 ## JS基础知识（上）
 
@@ -29,27 +29,27 @@
 
 ##### 变量类型
 - **值类型** vs **引用类型**
-	- 值类型：直接将值存在变量的内存空间里面
-	- 引用类型：另外开辟内存空间，将那个空间的地址存在变量里面。(为了共用内存空间)
+    - 值类型：直接将值存在变量的内存空间里面
+    - 引用类型：另外开辟内存空间，将那个空间的地址存在变量里面。(为了共用内存空间)
 - **typeof** 运算符详解
 
-	``` javascript
-	typeof undefined //undefined
-	typeof 'abc' //string
-	typeof 123 //nubmer
-	typeof true //boolean
-	typeof {} //object
-	typeof [] //object
-	typeof null //object
-	typeof console.log //function
-	```
-	- **typeof**只能区分值类型的详细类型，不能区分函数之外的引用类型的详细类型。可以返回的值为`undefined `,`string `,`nubmer `,`boolean `,`object `,`function`。
+    ``` javascript
+    typeof undefined //undefined
+    typeof 'abc' //string
+    typeof 123 //nubmer
+    typeof true //boolean
+    typeof {} //object
+    typeof [] //object
+    typeof null //object
+    typeof console.log //function
+    ```
+    - **typeof**只能区分值类型的详细类型，不能区分函数之外的引用类型的详细类型。可以返回的值为`undefined `,`string `,`nubmer `,`boolean `,`object `,`function`。
 
 ##### 变量计算
 - 强制类型转换
-	- 字符串拼接
-	- == 运算符
-	- 逻辑运算符
+    - 字符串拼接
+    - == 运算符
+    - 逻辑运算符
 
 #### JS内置函数 -- 数据封装类对象
 - Object
@@ -96,18 +96,18 @@
 
 #### 解题
 - 如何准确判断一个变量是**数组类型**
-	- Array.isArray(arr) === true
-	- arr instanceof Array === true
-	- arr.constructor === Array (但是构造器是可以被改变的，所以并不一定准确)
-	- Object.prototype.toString.apply(arr) === '[object Array]' 
+    - Array.isArray(arr) === true
+    - arr instanceof Array === true
+    - arr.constructor === Array (但是构造器是可以被改变的，所以并不一定准确)
+    - Object.prototype.toString.apply(arr) === '[object Array]' 
 - 写一个原型链继承的例子
-	- 略
+    - 略
 - 描述 **new** 一个对象的过程
-	- 创建一个新对象
-	- this 指向这个对象
-	- 执行代码，即对this赋值
-	- 返回 this
-	
+    - 创建一个新对象
+    - this 指向这个对象
+    - 执行代码，即对this赋值
+    - 返回 this
+    
 #### 写一个贴近实际开发原型链继承
 - 写一个封装DOM查询的例子
 
@@ -181,7 +181,7 @@ var div1 = new Elem ('div1')
 ``` javascript
 console.log(1);
 setTimeout(function(){
-	console.log(2);
+    console.log(2);
 });
 console.log(3);
 ``` 
@@ -265,16 +265,16 @@ console.log(random3)
 
 ``` javascript
 function forEach(obj, fn){
-	var key;
-	if(obj instanceof Array){
-		obj.forEach(function (item, index){
-			fn(item, index)
-		})
-	} else {
-		for(key in obj){
-			fn(obj[key], key)
-		}
-	}
+    var key;
+    if(obj instanceof Array){
+        obj.forEach(function (item, index){
+            fn(item, index)
+        })
+    } else {
+        for(key in obj){
+            fn(obj[key], key)
+        }
+    }
 }
 ```
 
@@ -282,28 +282,28 @@ function forEach(obj, fn){
 
 ### DOM操作（Document Object Model）
 - DOM 是哪种基本的数据结构
-	- 树
+    - 树
 - DOM 操作常用的API有哪些
-	- 获取DOM节点，以及节点的 property 和 Attribute
-	- 获取父节点，获取子节点
-	- 新增节点，删除节点
+    - 获取DOM节点，以及节点的 property 和 Attribute
+    - 获取父节点，获取子节点
+    - 新增节点，删除节点
 - DOM 节点的 attr 和 property 有什么区别
-	- property 只是一个js对象的属性的修改
-	- Attribute 是对html标签属性的修改 
+    - property 只是一个js对象的属性的修改
+    - Attribute 是对html标签属性的修改 
 #### DOM节点操作
 - 获取DOM节点
-	- **getElementById("id")**
-	- **getElementsByClassName("class")** 类数组
-	- **getElementsByTagName("div")** 类数组
-	- **getElementsByName("name")** 只有部分标签的name可以生效，比如表单、表单元素、img、iframe等
-	- **querySelector('div p #demo .demo')** css选择器的写法,querySelector永远选择一组里面的第一个，所以返回的不是一个类数组而是一个具体的元素。
-	- **querySelectorAll('div p #demo .demo')** 一个类数组的集合的话，那么就用querySelectorAll()方法。
-	- 两个方法的问题在于，他们返回的不像前面四个是一个实时改变的元素，而是一个副本。当我们用这两个方法选择出来元素之后，我们把本身那个元素修改一下，会发现我们选择出来的那个元素没有变化。
+    - **getElementById("id")**
+    - **getElementsByClassName("class")** 类数组
+    - **getElementsByTagName("div")** 类数组
+    - **getElementsByName("name")** 只有部分标签的name可以生效，比如表单、表单元素、img、iframe等
+    - **querySelector('div p #demo .demo')** css选择器的写法,querySelector永远选择一组里面的第一个，所以返回的不是一个类数组而是一个具体的元素。
+    - **querySelectorAll('div p #demo .demo')** 一个类数组的集合的话，那么就用querySelectorAll()方法。
+    - 两个方法的问题在于，他们返回的不像前面四个是一个实时改变的元素，而是一个副本。当我们用这两个方法选择出来元素之后，我们把本身那个元素修改一下，会发现我们选择出来的那个元素没有变化。
 - property
-	- nodeType
-	- nodeName
+    - nodeType
+    - nodeName
 - Attribute
-	- ...
+    - ...
 
 #### DOM结构操作
 - 新增节点
@@ -373,35 +373,35 @@ history.forward()
 
 ``` javascript
 function AJAX(json) {
-	var url = json.url,
-		method = json.method,
-		flag = json.flag,
-		data = json.data,
-		callBack = json.callBack,
-		xhr = null;
-	if(window.XMLHttpRequest) {
-		xhr = new window.XMLHttpRequest();
-	}else {
-		xhr = new ActiveXObject('Mircosoft.XMLHTTP');
-	}			
-	if(method == 'get') {
-      	url += '?' + data + new Date().getTime(); 
-		xhr.open('get', url, flag);
-	}else {
-		xhr.open('post', url, flag);
-	}
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			// 数据已经可用了
-			callBack(xhr.responseText);
-		}
-	}
-	if(method == 'get') {
-		xhr.send();
-	}else {
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urle');
-		xhr.send(data);
-	}	
+    var url = json.url,
+        method = json.method,
+        flag = json.flag,
+        data = json.data,
+        callBack = json.callBack,
+        xhr = null;
+    if(window.XMLHttpRequest) {
+        xhr = new window.XMLHttpRequest();
+    }else {
+        xhr = new ActiveXObject('Mircosoft.XMLHTTP');
+    }           
+    if(method == 'get') {
+        url += '?' + data + new Date().getTime(); 
+        xhr.open('get', url, flag);
+    }else {
+        xhr.open('post', url, flag);
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 数据已经可用了
+            callBack(xhr.responseText);
+        }
+    }
+    if(method == 'get') {
+        xhr.send();
+    }else {
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urle');
+        xhr.send(data);
+    }   
 }
 ```
 
@@ -488,12 +488,12 @@ function AJAX(json) {
 ``` javascript
 //util.js
 funcvtion getFormatDate(date, type) {
-	//......
+    //......
 }
 
 //a-util.js
 function aGetFormatDate(data) {
-	return getFormatDate(data, 2)
+    return getFormatDate(data, 2)
 }
 
 //a.js
@@ -517,35 +517,35 @@ console.log(aGetFormatDate(dt))
 ``` javascript
 //util.js 
 define(function () {
-	return {
-		getFormatDate: function(data, type) {
-			//...
-		}
-	}
+    return {
+        getFormatDate: function(data, type) {
+            //...
+        }
+    }
 })
 
 //a-util.js
 define(['./util.js'], function (util) {
-	return {
-		aGetFormatDate: function(data) {
-			return util.getFormatDate(data, 2)
-		}
-	}
+    return {
+        aGetFormatDate: function(data) {
+            return util.getFormatDate(data, 2)
+        }
+    }
 })
 
 //a.js
 define(['./a-util.js'], function (aUtil) {
-	return {
-		printDate: function (date) {
-			console.log(aUtil.aGetFormatDate(data))
-		}
-	}
+    return {
+        printDate: function (date) {
+            console.log(aUtil.aGetFormatDate(data))
+        }
+    }
 })
 
 //main.js
 require(['./a.js'], function (a) {
-	var data = new Date();
-	a.printDate(date);
+    var data = new Date();
+    a.printDate(date);
 }) 
 
 //html使用
@@ -563,21 +563,21 @@ require(['./a.js'], function (a) {
 ``` javascript
 //util.js
 module.exports = {
-	getFormatDate: function (date, type) {
-		//...
-	}
+    getFormatDate: function (date, type) {
+        //...
+    }
 }
 
 //a-util.js
 var util = require('util.js');
 module.exports = {
-	aGetFormatDate: function (date) {
-		return util.getFormatDate(date, 2);
-	}
+    aGetFormatDate: function (date) {
+        return util.getFormatDate(date, 2);
+    }
 }
 ``` 
 
-### AMD 和	CommonJS的使用场景
+### AMD 和   CommonJS的使用场景
 - 需要异步加载JS，使用AMD
 - 使用 npm 之后，建议使用CommonJS
 

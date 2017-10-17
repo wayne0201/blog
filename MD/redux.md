@@ -19,9 +19,9 @@
 - Action 就是一个描述“发生了什么”的普通对象。比如：
 
 ``` javascript
- { type: 'LIKE_ARTICLE', articleId: 42 };
- { type: 'FETCH_USER_SUCCESS', response: { id: 3, name: 'Mary' } };
- { type: 'ADD_TODO', text: 'Read the Redux docs.'};
+{ type: 'LIKE_ARTICLE', articleId: 42 };
+{ type: 'FETCH_USER_SUCCESS', response: { id: 3, name: 'Mary' } };
+{ type: 'ADD_TODO', text: 'Read the Redux docs.'};
 ```
 - 可以把 `action` 理解成新闻的摘要。如 “玛丽喜欢42号文章。” 或者 “任务列表里添加了'学习 Redux 文档'”。
 你可以在任何地方调用 `store.dispatch(action)`，包括组件中、XHR 回调中、甚至定时器中。
@@ -31,25 +31,25 @@
 - Store 会把两个参数传入 `reducer`： 当前的 `state` 树和 `action`。例如，在这个 `todo` 应用中，根 `reducer` 可能接收这样的数据：
 
 ``` javascript
- // 当前应用的 state（todos 列表和选中的过滤器）
- let previousState = {
-   visibleTodoFilter: 'SHOW_ALL',
-   todos: [
-     {
-       text: 'Read the docs.',
-       complete: false
-     }
-   ]
- }
+// 当前应用的 state（todos 列表和选中的过滤器）
+let previousState = {
+    visibleTodoFilter: 'SHOW_ALL',
+    todos: [
+        {
+            text: 'Read the docs.',
+            complete: false
+        }
+    ]
+}
 
- // 将要执行的 action（添加一个 todo）
- let action = {
-   type: 'ADD_TODO',
-   text: 'Understand the flow.'
- }
+// 将要执行的 action（添加一个 todo）
+let action = {
+    type: 'ADD_TODO',
+    text: 'Understand the flow.'
+}
 
- // render 返回处理后的应用状态
- let nextState = todoApp(previousState, action);
+// render 返回处理后的应用状态
+let nextState = todoApp(previousState, action);
 ```
 - 注意 reducer 是纯函数。它仅仅用于计算下一个 state。它应该是完全可预测的：多次传入相同的输入必须产生相同的输出。它不应做有副作用的操作，如 API 调用或路由跳转。这些应该在 `dispatch(action)` 前发生。
 
@@ -60,37 +60,37 @@
 -下面演示 combineReducers() 如何使用。假如你有两个 reducer：一个是 todo 列表，另一个是当前选择的过滤器设置：
 
 ``` javascript
- function todos(state = [], action) {
-   // 省略处理逻辑...
-   return nextState;
- }
+function todos(state = [], action) {
+    // 省略处理逻辑...
+    return nextState;
+}
 
- function visibleTodoFilter(state = 'SHOW_ALL', action) {
-   // 省略处理逻辑...
-   return nextState;
- }
+function visibleTodoFilter(state = 'SHOW_ALL', action) {
+    // 省略处理逻辑...
+    return nextState;
+}
 
- let todoApp = combineReducers({
-   todos,
-   visibleTodoFilter
- })
+let todoApp = combineReducers({
+    todos,
+    visibleTodoFilter
+})
 ```
  
 - 当你触发 `action` 后，`combineReducers` 返回的 `todoApp` 会负责调用两个 reducer：
 
 ``` javascript
- let nextTodos = todos(state.todos, action);
- let nextVisibleTodoFilter = visibleTodoFilter(state.visibleTodoFilter, action);
+let nextTodos = todos(state.todos, action);
+let nextVisibleTodoFilter = visibleTodoFilter(state.visibleTodoFilter, action);
 ```
 
 - 然后会把两个结果集合并成一个 state 树：
 
 
 ``` javascript
- return {
-   todos: nextTodos,
-   visibleTodoFilter: nextVisibleTodoFilter
- };
+return {
+    todos: nextTodos,
+    visibleTodoFilter: nextVisibleTodoFilter
+};
 ```
 - 虽然 `combineReducers()` 是一个很方便的辅助工具，你也可以选择不用；你可以自行实现自己的根 `reducer`！
 
@@ -120,123 +120,122 @@
 
 - #### reducer
 
-	- 在Redux里，负责响应`action`并修改数据的角色就是`reducer`。`reducer`本质上是一个纯函数，其函数签名为`reducer(previousState, action) => newState`。`reducer`在处理`action`时，需传入一个`previousState`参数。`reducer`的职责就是根据`previousState`和`action`来计算出新的`newState`。
-	- 使用方法将`reducer`即下面的`todo`作为参数传入createStore(todo)中
+    - 在Redux里，负责响应`action`并修改数据的角色就是`reducer`。`reducer`本质上是一个纯函数，其函数签名为`reducer(previousState, action) => newState`。`reducer`在处理`action`时，需传入一个`previousState`参数。`reducer`的职责就是根据`previousState`和`action`来计算出新的`newState`。
+    - 使用方法将`reducer`即下面的`todo`作为参数传入createStore(todo)中
 
-	``` javascript
-	//以下为reducer的格式
-	const todo = (state = initialState, action) => {
-		switch(action.type) {
-			case 'XXX':
-				return //具体的业务逻辑;
-			case 'XXX':
-				return //具体的业务逻辑;	
-	       default:
-	          return state;
-	    }
-	}
-	```
+    ``` javascript
+    //以下为reducer的格式
+    const todo = (state = initialState, action) => {
+        switch(action.type) {
+            case 'XXX':
+                return //具体的业务逻辑;
+            case 'XXX':
+                return //具体的业务逻辑;   
+            default:
+                return state;
+        }
+    }
+    ```
 
 - #### getState()
 
-	- 使用方法`getState()`
-	- 获取`store`中的状态。
+    - 使用方法`getState()`
+    - 获取`store`中的状态。
 
 - #### dispatch(action)
 
-	- 使用方法`store.dispatch(action)`
-	- 分发一个`action`，并返回这个`action`，这是唯一能改变`store`中数据的方式。store.dispatch接受一个Action对象作为参数，将它发送出去。
+    - 使用方法`store.dispatch(action)`
+    - 分发一个`action`，并返回这个`action`，这是唯一能改变`store`中数据的方式。store.dispatch接受一个Action对象作为参数，将它发送出去。
 
 - #### subscribe(listener)
 
-	- 使用方法`store.subscribe(listenter)`
-	- 注册一个监听者，它在`store`发生变化时被调用,一旦State发生了变化，就会自动执行这个函数。通过subscribe绑定了一个监听函数之后，只要dispatch了一个action，所有监听函数都会自动执行一遍。
+    - 使用方法`store.subscribe(listenter)`
+    - 注册一个监听者，它在`store`发生变化时被调用,一旦State发生了变化，就会自动执行这个函数。通过subscribe绑定了一个监听函数之后，只要dispatch了一个action，所有监听函数都会自动执行一遍。
 
 - #### replaceReducer(nextReducer)
 
-	- 更新当前`store`里的`reducer`，一般只会在开发者模式中调用该方法。
+    - 更新当前`store`里的`reducer`，一般只会在开发者模式中调用该方法。
 
 - #### createStore的实现
 
-	- 包含`getState()`，`dispatch(action)`，`subscribe(listener)`；本函数近似源码，可简单实现功能与帮助理解`createStore`的原理
-	
-	``` javascript
-	const createStore = (reducer) => {
-	    let state; //声明一个变量承接状态
-	    let list = [];//声明一个数组用于储存监听函数
-	    const getState = () => {
-	        return state;//直接返回state;
-	    }
-	    const dispatch = (action) =>{
-	        state = reducer(state, action);//更新状态,且循环list数组，并执行里面的事件
-	        list.forEach((fn) => {
-	            fn();
-	        })
-	    }
-	    const subscribe = (fn) => {
-	        list.push(fn);//将函数传入list中
-	        return () => {
-	            list = list.filter(cd => cd != fn)
-	        }
-	    }
-	    return {
-	        getState,
-	        subscribe,
-	        dispatch
-	    }
-	}
-	```
+    - 包含`getState()`，`dispatch(action)`，`subscribe(listener)`；本函数近似源码，可简单实现功能与帮助理解`createStore`的原理
+    
+    ``` javascript
+    const createStore = (reducer) => {
+        let state; //声明一个变量承接状态
+        let list = [];//声明一个数组用于储存监听函数
+        const getState = () => {
+            return state;//直接返回state;
+        }
+        const dispatch = (action) =>{
+            state = reducer(state, action);//更新状态,且循环list数组，并执行里面的事件
+            list.forEach((fn) => {
+                fn();
+            })
+        }
+        const subscribe = (fn) => {
+            list.push(fn);//将函数传入list中
+            return () => {
+                list = list.filter(cd => cd != fn)
+            }
+        }
+        return {
+            getState,
+            subscribe,
+            dispatch
+        }
+    }
+    ```
 
 - ### combineReducers
 
-	- 随着应用变得复杂，需要对 `reducer` 函数 进行拆分，拆分后的每一块独立负责管理 `state` 的一部分。`combineReducers` 辅助函数的作用是，把一个由多个不同 `reducer` 函数作为 `value` 的 `object`，合并成一个最终的 `reducer` 函数，然后就可以对这个 `reducer` 调用 `createStore`。
+    - 随着应用变得复杂，需要对 `reducer` 函数 进行拆分，拆分后的每一块独立负责管理 `state` 的一部分。`combineReducers` 辅助函数的作用是，把一个由多个不同 `reducer` 函数作为 `value` 的 `object`，合并成一个最终的 `reducer` 函数，然后就可以对这个 `reducer` 调用 `createStore`。
 
 - #### 使用方法
 
-	- 将多个不同的`reducer`作为对象的属性传入`combineReducers({})`函数中，
+    - 将多个不同的`reducer`作为对象的属性传入`combineReducers({})`函数中，
 
 ``` javascript
 const rootReducer = combineReducers({
- 	reducer1,
- 	reducer2，
- 	...
+    reducer1,
+    reducer2，
+    ...
 })
 ```
 
 - #### 返回值
 
-	- (Function)：一个调用 reducers 对象里所有 reducer 的 reducer，并且构造一个与 reducers 对象结构相同的 state 对象。
+    - (Function)：一个调用 reducers 对象里所有 reducer 的 reducer，并且构造一个与 reducers 对象结构相同的 state 对象。
 
-	``` javascript
-		let store = createStore(rootReducer)
-		//store = {
-			reducer1: ... ,
-			reducer2: ... ,
-			...
-		}
-		let {reducer1, reducer2} = store; //取出
-	```
+    ``` javascript
+        let store = createStore(rootReducer)
+        //store = {
+            reducer1: ... ,
+            reducer2: ... ,
+            ...
+        }
+        let {reducer1, reducer2} = store; //取出
+    ```
 
 - #### 模拟实现combineReducers
 
 ``` javascript
 //研究逻辑看这个
 const combineReducers = (reducers) => {
-  return (state = {}, action) => {
-    let newState = {};
-    Object.keys(reducers).forEach((key) =>{
-      newState[key] = reducers[key](state[key], action);
-    })
-    return newState;
-  }
+    return (state = {}, action) => {
+        let newState = {};
+        Object.keys(reducers).forEach((key) =>{
+            newState[key] = reducers[key](state[key], action);
+        })
+        return newState;
+    }
 }
-	
+    
 //简写装逼看这个
 const combineReducers = (reducers) => (state = {}, action) => Object.keys(reducers).reduce((newState, key) => {
-  newState[key] = reducers[key](state[key], action);
-  return newState;
-},
-{})
+    newState[key] = reducers[key](state[key], action);
+    return newState;
+},{})
 ```
 
 ## react的跨级组件通信（虫洞）帮助理解（react-redux）
@@ -247,40 +246,40 @@ const combineReducers = (reducers) => (state = {}, action) => Object.keys(reduce
 
 - ### context使用方法
 
-	- 在外层定义一个`getChildContext`方法，在父层制定`childContextTypes`。
-	
-	``` javascript
-	class Provider extends Component{
-		getChildContext() {
-	  		return {store: ...};
-		}
-	   render(){
-	       return(
-	         this.props.children
-	       )
-	   }
-	 }
-	
-	Provider.childContextTypes = {
-	  store : React.PropTypes.object
-	};
-	```
+    - 在外层定义一个`getChildContext`方法，在父层制定`childContextTypes`。
+    
+    ``` javascript
+    class Provider extends Component{
+        getChildContext() {
+            return {store: ...};
+        }
+        render(){
+            return(
+                this.props.children
+            )
+        }
+    }
+    
+    Provider.childContextTypes = {
+        store : React.PropTypes.object
+    };
+    ```
 
-  - 在内层设置组件的`contextTypes`后，即可在组件里通过`this.context.`来访问。
+    - 在内层设置组件的`contextTypes`后，即可在组件里通过`this.context.`来访问。
   
-  ``` javascript
-  	class child extends Component{
-	   render(){
-	   		const store = this.context.store;
-	       return(
-	         <div>1</div>
-	       )
-	   }
-	 }
-  	child.contextTypes = {
-  		store: React.PropTypes.object
-	}
-  ```
+    ``` javascript
+    class child extends Component{
+        render(){
+            const store = this.context.store;
+            return(
+                <div>1</div>
+            )
+        }
+    }
+    child.contextTypes = {
+        store: React.PropTypes.object
+    }
+    ```
 
 
 
@@ -296,29 +295,28 @@ const combineReducers = (reducers) => (state = {}, action) => Object.keys(reduce
 
 ``` javascript
 export default class Provider extends Component {
-  getChildContext() {
-    return { store: this.store }
-  }
+    getChildContext() {
+        return { store: this.store }
+    }
 
-  constructor(props, context) {
-    super(props, context)
-    this.store = props.store
-  }
+    constructor(props, context) {
+        super(props, context)
+        this.store = props.store
+    }
 
-  render() {
-    return Children.only(this.props.children)
-  }
+    render() {
+        return Children.only(this.props.children)
+    }
 }
-
 ```
 - 用法
 
 ``` javascript
 ReactDom.render(
-	<Provider store = {store}>
-	  <App />
-	</Provider>,
-	document.getElementById("root")
+    <Provider store = {store}>
+      <App />
+    </Provider>,
+    document.getElementById("root")
 )
 ```
 
@@ -330,32 +328,32 @@ ReactDom.render(
 
 ``` javascript
 const connect = (mapStateToProps, mapDispatchToProps) => {
-  return (WrapperComponent) => {
+    return (WrapperComponent) => {
     class Connect extends Component {
-      componentDidMount() {
-        const store = this.context.store;
-        this.unsubscribe = store.subscribe(() => {
-          this.forceUpdate();
-        })
-      }
-      componentWillUnmount() {
-        this.unsubscribe();
-      }
-      render (){
-        const store = this.context.store;
-        const stateProps = mapStateToProps(store.getState());
-        const dispatchProps = mapDispatchToProps(store.dispatch);
-        const props = Object.assign({}, stateProps, dispatchProps);
+        componentDidMount() {
+            const store = this.context.store;
+            this.unsubscribe = store.subscribe(() => {
+                this.forceUpdate();
+            })
+        }
+        componentWillUnmount() {
+            this.unsubscribe();
+        }
+        render (){
+            const store = this.context.store;
+            const stateProps = mapStateToProps(store.getState());
+            const dispatchProps = mapDispatchToProps(store.dispatch);
+            const props = Object.assign({}, stateProps, dispatchProps);
 
-        // return <WrapperComponent {...props} />;
-        return React.createElement(WrapperComponent, props);
-      }
+            // return <WrapperComponent {...props} />;
+            return React.createElement(WrapperComponent, props);
+        }
     }
     Connect.contextTypes = {
-      store: React.PropTypes.object
+        store: React.PropTypes.object
     };
-    return Connect;
-  }
+        return Connect;
+    }
 }
 ```
 
@@ -366,9 +364,9 @@ const connect = (mapStateToProps, mapDispatchToProps) => {
 
 ``` javascript
 const mapStateToProps = (state, [ownProps]) => {
-  return {
-    todos : state.todos
-  }
+    return {
+        todos : state.todos
+    }
 }
 ```
 
@@ -378,11 +376,11 @@ const mapStateToProps = (state, [ownProps]) => {
 
 ``` javascript
 const mapDispatchToProps = (dispatch, [ownProps]) => {
-  return{
-	 ... : () => {
-      dispatch(...)
+    return{
+        ... : () => {
+            dispatch(...)
+        }
     }
-  }
 }
 ```
 
@@ -395,9 +393,9 @@ const mapDispatchToProps = (dispatch, [ownProps]) => {
 #### options
 - 如果指定这个参数，可以定制 connector 的行为。
 
-	- [pure = true] (Boolean): 如果为 `true`，`connector` 将执行 `shouldComponentUpdate` 并且浅对比 `mergeProps` 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 `state` 而只依赖于 `props` 和 Redux `store` 的 `state`。默认值为 `true`。
-	
-	- [withRef = false] (Boolean): 如果为 `true`，`connector` 会保存一个对被包装组件实例的引用，该引用通过 `getWrappedInstance()` 方法获得。默认值为 `false`。
+    - [pure = true] (Boolean): 如果为 `true`，`connector` 将执行 `shouldComponentUpdate` 并且浅对比 `mergeProps` 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 `state` 而只依赖于 `props` 和 Redux `store` 的 `state`。默认值为 `true`。
+    
+    - [withRef = false] (Boolean): 如果为 `true`，`connector` 会保存一个对被包装组件实例的引用，该引用通过 `getWrappedInstance()` 方法获得。默认值为 `false`。
 
 
 
