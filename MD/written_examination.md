@@ -106,7 +106,39 @@
 
     ```
 
-7. 实现节流函数(是节流不是去抖)
+7. 实现节流函数和去抖函数
+
+    - 节流函数：函数节流就是预定一个函数只有在大于等于执行周期时才执行，周期内调用不执行。好像水滴攒到一定重量才会落下一样。
+
+        ``` javascript
+        function throttle(method, delay){
+            var last = 0;
+            return function (){
+                var now = +new Date();
+                if(now - last > delay){
+                    method.apply(this,arguments);
+                    last = now;
+                }
+            }
+        }
+        document.getElementById('throttle').onclick = throttle(function(){console.log('click')},2000);
+        ```
+    - 去抖函数：函数防抖就是在函数需要频繁触发情况时，只有足够空闲的时间，才执行一次。好像公交司机会等人都上车后才出站一样。
+
+        ``` javascript
+        function debounce(method, delay){
+            var timer = null;
+            return function(){
+                var context = this,args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function(){
+                    method.apply(context, args);
+                },delay);
+            }
+        }
+        
+        document.getElementById('debounce').onclick = debounce(function(){console.log('click')},2000);
+        ```
 
 8. 实现函数function fn(arr, n, sum){...},arr是一个乱序的但是不重复的一个数组。然后在这个数组里选n个数，加起来等于sum。返回一种结果就行。比如:
     
@@ -119,7 +151,7 @@
 
 9. 实现以下inherit继承函数,要求child继承parent，而且child修改prototype不会影响到parent
     
-    ```
+    ``` javascript
     var child = inherit(parent, {
         name: 'child'
     })
