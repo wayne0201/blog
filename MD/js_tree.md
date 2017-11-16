@@ -273,7 +273,7 @@ class BinaryTree {
     remove(key) {
         let findMinNode = (node, key) => {
             //查找最小子节点
-            let node = this.root;
+            let node = node || this.root;
             if (node) {
                 while (node && node.left !== null) {
                     node = node.left;
@@ -466,7 +466,7 @@ class BinaryTree {
 
     remove(key) {
         let findMinNode = (node, key) => {
-            let node = this.root;
+            let node = node || this.root;
             if (node) {
                 while (node && node.left !== null) {
                     node = node.left;

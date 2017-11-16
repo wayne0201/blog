@@ -87,7 +87,7 @@ let insertionSort = (arr = []) => {
 ``` javascript
 let qSort = (arr) => {
     let len = arr.length;
-    if(!len){
+    if(len <= 0){
         return arr;
     }
     let left = [];
@@ -126,7 +126,7 @@ let merge = (left, right) => {
 
 let mergeSort = (arr) => {  //采用自上而下的递归方法
     let len = arr.length;
-    if(len == 1) {
+    if(len <= 1) {
         return arr;
     }
     let middle = Math.floor(len / 2),
